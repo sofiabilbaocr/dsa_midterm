@@ -1,22 +1,40 @@
-
 from ll import LinkedList
-# Importamos la lista hardcoded
-from songs_data import canciones 
+from songs_data import canciones
+from memory_profiler import profile
+import timeit
 
-def cargar_datos_iterativamente(playlist, lista_datos):
-    # Carga dinámica/iterativa: inserta cada diccionario a la LinkedList
-    for cancion in lista_datos:
-        playlist.append(cancion)
+# 1. PERFILAMIENTO DE MEMORIA
+@profile
+def perfilar_memoria():
+    playlist_memoria = LinkedList()
+    
+    # Carga iterativa/dinámica de la data importada
+    for cancion in canciones:
+        playlist_memoria.append(cancion)
+        
+    return "Carga completada"
+
+
+# 2. PERFILAMIENTO DE TIEMPO
+def perfilar_tiempo():
+    playlist_tiempo = LinkedList()
+    
+    # Carga iterativa/dinámica
+    for cancion in canciones:
+        playlist_tiempo.append(cancion)
 
 if __name__ == "__main__":
-    mi_playlist = LinkedList()
+    print("=" * 50)
+    print(" INICIANDO PERFILAMIENTO DE MEMORIA ")
+    print("=" * 50)
+    # Al llamar esta función, se imprimirá la tabla de consumo MB a MB
+    perfilar_memoria()
     
-    print("Playlist creada (vacía)")
+    print("\n" + "=" * 50)
+    print(" INICIANDO PERFILAMIENTO DE TIEMPO ")
+    print("=" * 50)
+    # Ejecutamos la carga 500 veces para tener un promedio confiable
+    tiempo_total = timeit.timeit(perfilar_tiempo, number=500)
     
-    # Manda a llamar la función de carga pasándole la data importada
-    cargar_datos_iterativamente(mi_playlist, canciones)
-    
-    print("Se han cargado 100 canciones exitosamente de forma iterativa.")
-    
-    if mi_playlist.current is not None:
-         print(f"Primera canción en el nodo actual: {mi_playlist.current.data['nombre']}")
+    print(f"El tiempo total para 500 ejecuciones fue: {tiempo_total:.5f} segundos")
+    print(f"El tiempo promedio por ejecucion (cargar 100 canciones) fue: {tiempo_total / 500:.6f} segundos")
