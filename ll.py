@@ -61,6 +61,8 @@ class LinkedList:
             # Comportamiento normal (lineal)
             if self.current.next is not None:
                 self.current = self.current.next
+            else:
+                print("\n[!] Ya llegaste al FINAL de la playlist.") # <-- Agregado
                 
         return self.current
 
@@ -78,5 +80,7 @@ class LinkedList:
             # Comportamiento normal (lineal)
             if self.current.prev is not None:
                 self.current = self.current.prev
+            else:
+                print("\n[!] Ya estás en el INICIO de la playlist.") # <-- Agregado
                 
         return self.current
