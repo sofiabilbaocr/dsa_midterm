@@ -1,6 +1,6 @@
 
 Examen parcial de Estructuras de Datos.
-*Christian
+*Christian lo vió
 
 1. Profiling del Metodo de Carga de Datos
 
